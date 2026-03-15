@@ -10,25 +10,25 @@
     --teal: #00B8A2;
     --teal-subtle: rgba(0, 184, 162, 0.1);
     --teal-border: rgba(0, 184, 162, 0.22);
-
+ 
     --bg: #181C1F;
     --bg-deep: #13171A;
     --surface: #1E2328;
     --surface-2: #232830;
     --surface-3: #1A1F24;
-
+ 
     --text: #C8D4D8;
     --text-muted: #6E828A;
     --text-dim: #2E3C42;
     --white: #ECF2F4;
-
+ 
     --border: rgba(255,255,255,0.06);
     --border-hover: rgba(0,184,162,0.22);
   }
-
+ 
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
-
+ 
   body {
     background: var(--bg);
     color: var(--text);
@@ -37,7 +37,7 @@
     line-height: 1.7;
     overflow-x: hidden;
   }
-
+ 
   body::before {
     content: '';
     position: fixed;
@@ -49,7 +49,7 @@
     pointer-events: none;
     z-index: 0;
   }
-
+ 
   .container {
     max-width: 900px;
     margin: 0 auto;
@@ -57,14 +57,14 @@
     position: relative;
     z-index: 1;
   }
-
+ 
   /* ─── HEADER ─── */
   header {
     padding: 56px 0 72px;
     position: relative;
     overflow: hidden;
   }
-
+ 
   header::after {
     content: '';
     position: absolute;
@@ -73,16 +73,16 @@
     background: radial-gradient(circle, rgba(0,184,162,0.06) 0%, transparent 68%);
     pointer-events: none;
   }
-
+ 
   .header-inner {
     display: flex;
     align-items: center;
     gap: 22px;
     margin-bottom: 52px;
   }
-
+ 
   .logo { width: 56px; height: 56px; flex-shrink: 0; }
-
+ 
   .brand-name {
     font-family: 'Unbounded', sans-serif;
     font-size: 22px;
@@ -90,7 +90,7 @@
     color: var(--white);
     letter-spacing: -0.3px;
   }
-
+ 
   .brand-tagline {
     font-size: 10px;
     color: var(--text-muted);
@@ -98,7 +98,7 @@
     text-transform: uppercase;
     margin-top: 5px;
   }
-
+ 
   .doc-label {
     display: inline-flex;
     align-items: center;
@@ -112,16 +112,16 @@
     margin-bottom: 28px;
     font-family: 'Unbounded', sans-serif;
   }
-
+ 
   .doc-dot {
     width: 4px; height: 4px;
     background: var(--teal);
     border-radius: 50%;
     animation: blink 2.4s ease-in-out infinite;
   }
-
+ 
   @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
-
+ 
   .hero-title {
     font-family: 'Unbounded', sans-serif;
     font-size: clamp(32px, 5vw, 50px);
@@ -131,22 +131,22 @@
     color: var(--white);
     margin-bottom: 18px;
   }
-
+ 
   .hero-title .ac { color: var(--teal); }
-
+ 
   .hero-sub {
     font-size: 14px;
     color: var(--text-muted);
     max-width: 440px;
     line-height: 1.7;
   }
-
+ 
   /* ─── SECTION ─── */
   section {
     padding: 72px 0;
     border-top: 1px solid var(--border);
   }
-
+ 
   .eyebrow {
     font-family: 'Unbounded', sans-serif;
     font-size: 9px;
@@ -156,7 +156,7 @@
     margin-bottom: 10px;
     font-weight: 400;
   }
-
+ 
   .sec-title {
     font-family: 'Unbounded', sans-serif;
     font-size: clamp(20px, 2.6vw, 28px);
@@ -166,7 +166,7 @@
     margin-bottom: 36px;
     line-height: 1.2;
   }
-
+ 
   /* ─── VISION ─── */
   .vision-lead {
     font-size: 15px;
@@ -178,27 +178,27 @@
     border-left: 2px solid var(--teal);
     line-height: 1.9;
   }
-
+ 
   .vision-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 2px;
   }
-
+ 
   @media (max-width: 620px) { .vision-grid { grid-template-columns: 1fr; } }
-
+ 
   .vblock {
     background: var(--surface);
     border: 1px solid var(--border);
     padding: 24px 28px;
     transition: background 0.25s, border-color 0.25s;
   }
-
+ 
   .vblock:hover {
     background: var(--surface-2);
     border-color: var(--border-hover);
   }
-
+ 
   .vblock-title {
     font-family: 'Unbounded', sans-serif;
     font-size: 11px;
@@ -208,16 +208,16 @@
     margin-bottom: 10px;
     text-transform: uppercase;
   }
-
+ 
   .vblock p {
     font-size: 13px;
     color: var(--text-muted);
     line-height: 1.85;
   }
-
+ 
   /* ─── STEPS ─── */
   .steps { display: grid; gap: 2px; }
-
+ 
   .step {
     display: grid;
     grid-template-columns: 68px 1fr;
@@ -226,12 +226,12 @@
     overflow: hidden;
     transition: background 0.25s, border-color 0.25s;
   }
-
+ 
   .step:hover {
     background: var(--surface-2);
     border-color: var(--border-hover);
   }
-
+ 
   .step-n {
     display: flex;
     align-items: center;
@@ -244,11 +244,11 @@
     transition: color 0.25s;
     flex-shrink: 0;
   }
-
+ 
   .step:hover .step-n { color: var(--teal); }
-
+ 
   .step-body { padding: 20px 26px; }
-
+ 
   .step-title {
     font-family: 'Unbounded', sans-serif;
     font-size: 12px;
@@ -256,18 +256,18 @@
     color: var(--white);
     margin-bottom: 5px;
   }
-
+ 
   .step-desc {
     font-size: 13px;
     color: var(--text-muted);
     line-height: 1.75;
   }
-
+ 
   /* ─── MONTHS — VERTICAL ─── */
   .months { display: flex; flex-direction: column; gap: 32px; }
-
+ 
   .month { background: var(--surface); border: 1px solid var(--border); overflow: hidden; }
-
+ 
   .month-head {
     padding: 18px 28px;
     background: var(--surface-3);
@@ -276,7 +276,7 @@
     align-items: baseline;
     gap: 16px;
   }
-
+ 
   .month-num {
     font-family: 'Unbounded', sans-serif;
     font-size: 9px;
@@ -285,7 +285,7 @@
     text-transform: uppercase;
     flex-shrink: 0;
   }
-
+ 
   .month-name {
     font-family: 'Unbounded', sans-serif;
     font-size: 14px;
@@ -293,7 +293,7 @@
     color: var(--white);
     letter-spacing: -0.3px;
   }
-
+ 
   .month-body {
     padding: 20px 28px;
     display: flex;
@@ -301,13 +301,13 @@
     gap: 0;
     min-height: 60px;
   }
-
+ 
   .month-body.drag-over {
     background: rgba(0,184,162,0.04);
     outline: 1px dashed var(--teal-border);
     outline-offset: -4px;
   }
-
+ 
   .task {
     display: grid;
     grid-template-columns: 28px 1fr 28px;
@@ -319,23 +319,23 @@
     transition: background 0.15s, opacity 0.15s;
     border-radius: 2px;
   }
-
+ 
   .task:last-child { border-bottom: none; }
-
+ 
   .task:hover { background: rgba(255,255,255,0.02); }
-
+ 
   .task.dragging {
     opacity: 0.35;
     cursor: grabbing;
   }
-
+ 
   .task.drag-placeholder {
     border: 1px dashed var(--teal-border);
     background: rgba(0,184,162,0.03);
     border-radius: 2px;
     min-height: 48px;
   }
-
+ 
   .drag-handle {
     display: flex;
     align-items: center;
@@ -346,11 +346,11 @@
     cursor: grab;
     margin-top: 6px;
   }
-
+ 
   .task:hover .drag-handle { opacity: 1; }
-
+ 
   .drag-handle svg { display: block; }
-
+ 
   .task-dot {
     width: 4px; height: 4px;
     background: var(--teal);
@@ -358,45 +358,45 @@
     margin-top: 9px;
     flex-shrink: 0;
   }
-
+ 
   .task-text {
     font-size: 13px;
     color: var(--white);
     line-height: 1.6;
     margin-bottom: 3px;
   }
-
+ 
   .task-with {
     font-size: 11px;
     color: var(--text-muted);
     font-style: italic;
     display: block;
   }
-
+ 
   .task-result {
     font-size: 11px;
     color: var(--teal);
     margin-top: 3px;
     display: block;
   }
-
+ 
   /* ─── TEAM ─── */
   .team { display: grid; grid-template-columns: repeat(2,1fr); gap: 2px; }
-
+ 
   @media (max-width: 560px) { .team { grid-template-columns: 1fr; } }
-
+ 
   .tcard {
     background: var(--surface);
     border: 1px solid var(--border);
     padding: 24px 28px;
     transition: background 0.25s, border-color 0.25s;
   }
-
+ 
   .tcard:hover {
     background: var(--surface-2);
     border-color: var(--border-hover);
   }
-
+ 
   .tcard-role {
     font-family: 'Unbounded', sans-serif;
     font-size: 11px;
@@ -408,9 +408,9 @@
     padding-bottom: 10px;
     border-bottom: 1px solid var(--border);
   }
-
+ 
   .tcard-items { display: flex; flex-direction: column; gap: 9px; }
-
+ 
   .tcard-item {
     font-size: 13px;
     color: var(--text-muted);
@@ -418,20 +418,20 @@
     padding-left: 14px;
     position: relative;
   }
-
+ 
   .tcard-item::before {
     content: '–';
     position: absolute;
     left: 0;
     color: var(--text-dim);
   }
-
+ 
   /* ─── FOOTER ─── */
   footer {
     padding: 44px 0;
     border-top: 1px solid var(--border);
   }
-
+ 
   .footer-row {
     display: flex;
     justify-content: space-between;
@@ -439,21 +439,21 @@
     flex-wrap: wrap;
     gap: 12px;
   }
-
+ 
   .footer-brand {
     font-family: 'Unbounded', sans-serif;
     font-size: 12px;
     font-weight: 600;
     color: var(--text-dim);
   }
-
+ 
   .footer-note { font-size: 10px; color: var(--text-dim); letter-spacing: 1px; }
-
-
-
+ 
+ 
+ 
   /* ─── COMMENTS ─── */
   .annotatable { position: relative; }
-
+ 
   .annotation-marker {
     position: absolute;
     right: -28px;
@@ -474,41 +474,28 @@
     flex-shrink: 0;
     z-index: 10;
   }
-
-  .vblock:hover .annotation-marker,
-  .step:hover .annotation-marker,
-  .task:hover .annotation-marker,
-  .month-head:hover .annotation-marker { opacity: 0.7; }
-
-  .annotation-marker:hover { opacity: 1 !important; transform: translateY(-50%) scale(1.1); }
-  .annotation-marker.active { opacity: 1; background: #E8A020; }
-
+ 
+  .annotation-marker { opacity: 0.35; }
+  .annotation-marker:hover { opacity: 1 !important; transform: translateY(-50%) scale(1.15); }
+  .annotation-marker.active { opacity: 1 !important; background: #E8A020; }
+ 
   .annotation-bubble {
     display: none;
-    position: absolute;
-    right: -320px;
-    top: 0;
-    width: 290px;
+    position: fixed;
+    right: 20px;
+    bottom: 80px;
+    width: min(320px, calc(100vw - 40px));
     background: var(--surface-2);
     border: 1px solid var(--teal-border);
     border-radius: 3px;
     z-index: 100;
     box-shadow: 0 8px 32px rgba(0,0,0,0.4);
   }
-
+ 
   .annotation-bubble.open { display: block; }
-
-  .annotation-bubble::before {
-    content: '';
-    position: absolute;
-    left: -6px; top: 14px;
-    width: 10px; height: 10px;
-    background: var(--surface-2);
-    border-left: 1px solid var(--teal-border);
-    border-bottom: 1px solid var(--teal-border);
-    transform: rotate(45deg);
-  }
-
+ 
+ 
+ 
   .ab-header {
     padding: 10px 14px 8px;
     border-bottom: 1px solid var(--border);
@@ -518,7 +505,7 @@
     letter-spacing: 1.5px;
     text-transform: uppercase;
   }
-
+ 
   .ab-name {
     width: 100%;
     background: transparent;
@@ -531,7 +518,7 @@
     padding: 8px 14px;
   }
   .ab-name::placeholder { color: var(--text-muted); opacity: 0.5; }
-
+ 
   .ab-text {
     width: 100%;
     background: transparent;
@@ -546,14 +533,14 @@
     min-height: 72px;
   }
   .ab-text::placeholder { color: var(--text-muted); opacity: 0.5; }
-
+ 
   .ab-footer {
     display: flex;
     gap: 6px;
     padding: 8px 14px;
     border-top: 1px solid var(--border);
   }
-
+ 
   .ab-btn {
     font-family: 'Unbounded', sans-serif;
     font-size: 9px;
@@ -568,7 +555,7 @@
   .ab-btn.primary { background: var(--teal); color: var(--bg-deep); }
   .ab-btn.secondary { background: transparent; border: 1px solid var(--border); color: var(--text-muted); }
   .ab-btn.danger { background: transparent; border: 1px solid rgba(220,80,80,0.3); color: rgba(220,80,80,0.8); }
-
+ 
   .annotation-saved {
     display: none;
     padding: 8px 12px;
@@ -580,9 +567,9 @@
     line-height: 1.6;
     border-radius: 0 2px 2px 0;
   }
-
+ 
   .annotation-saved.visible { display: block; }
-
+ 
   .annotation-saved .ann-author {
     font-family: 'Unbounded', sans-serif;
     font-size: 9px;
@@ -591,7 +578,7 @@
     display: block;
     margin-bottom: 4px;
   }
-
+ 
   /* Share panel */
   .share-panel {
     position: fixed;
@@ -607,24 +594,24 @@
     transform: translateY(100%);
     transition: transform 0.3s ease;
   }
-
+ 
   .share-panel.visible { transform: translateY(0); }
-
+ 
   .share-info {
     font-size: 12px;
     color: var(--text-muted);
     line-height: 1.5;
   }
-
+ 
   .share-info strong { color: var(--white); display: block; margin-bottom: 2px; }
-
+ 
   .share-url-row {
     display: flex;
     gap: 8px;
     align-items: center;
     margin-top: 8px;
   }
-
+ 
   .share-url-input {
     background: var(--surface);
     border: 1px solid var(--border);
@@ -636,7 +623,7 @@
     font-family: monospace;
     border-radius: 1px;
   }
-
+ 
   .share-copy-btn {
     font-family: 'Unbounded', sans-serif;
     font-size: 9px;
@@ -651,7 +638,7 @@
     transition: opacity 0.2s;
   }
   .share-copy-btn:hover { opacity: 0.85; }
-
+ 
   .share-close {
     background: none;
     border: 1px solid var(--border);
@@ -663,7 +650,7 @@
     border-radius: 1px;
     white-space: nowrap;
   }
-
+ 
   .floating-share-btn {
     position: fixed;
     bottom: 28px;
@@ -684,8 +671,8 @@
   }
   .floating-share-btn:hover { opacity: 0.9; transform: translateY(-1px); }
   .floating-share-btn.visible { display: flex; align-items: center; gap: 8px; }
-
-
+ 
+ 
   /* ─── REVEAL ─── */
   .r { opacity:0; transform:translateY(14px); animation: rev 0.5s ease forwards; }
   @keyframes rev { to { opacity:1; transform:translateY(0); } }
@@ -696,7 +683,7 @@
 </style>
 </head>
 <body>
-
+ 
 <header>
   <div class="container">
     <div class="header-inner">
@@ -706,12 +693,16 @@
         <div class="brand-tagline">Экосистема роста продаж</div>
       </div>
     </div>
-    <div class="doc-label"><span class="doc-dot"></span>Стратегический документ · 2025–2028</div>
+    <div class="doc-label"><span class="doc-dot"></span>Стратегический документ · 2026–2029</div>
     <h1 class="hero-title">От точки А<br>к точке <span class="ac">Б</span></h1>
     <p class="hero-sub">Видение компании, стратегия роста и план действий на ближайшие три месяца</p>
+    <div style="margin-top:24px;display:inline-flex;align-items:center;gap:10px;background:rgba(0,184,162,0.07);border:1px solid rgba(0,184,162,0.2);padding:10px 18px;border-radius:2px;font-size:12px;color:var(--text-muted);">
+      <span style="color:var(--teal);font-size:16px;">💬</span>
+      Нажмите кнопку <strong style="color:var(--white);margin:0 4px;">+</strong> у любого блока, чтобы оставить комментарий
+    </div>
   </div>
 </header>
-
+ 
 <!-- 01 VISION -->
 <section>
   <div class="container">
@@ -748,7 +739,7 @@
     </div>
   </div>
 </section>
-
+ 
 <!-- 02 STEPS -->
 <section>
   <div class="container">
@@ -768,7 +759,7 @@
     </div>
   </div>
 </section>
-
+ 
 <!-- 03 ACTION PLAN -->
 <section>
   <div class="container">
@@ -779,9 +770,9 @@
       <svg width="12" height="12" viewBox="0 0 12 16" fill="none" style="opacity:0.5;flex-shrink:0"><circle cx="3" cy="3" r="1.5" fill="currentColor"/><circle cx="9" cy="3" r="1.5" fill="currentColor"/><circle cx="3" cy="8" r="1.5" fill="currentColor"/><circle cx="9" cy="8" r="1.5" fill="currentColor"/><circle cx="3" cy="13" r="1.5" fill="currentColor"/><circle cx="9" cy="13" r="1.5" fill="currentColor"/></svg>
       Задачи можно перемещать между месяцами — если приоритеты изменятся, просто перетащите нужный пункт в другой блок.
     </p>
-
+ 
     <div class="months">
-
+ 
       <!-- MONTH 1 -->
       <div class="month r r1">
         <div class="month-head">
@@ -847,7 +838,7 @@
           </div>
         </div>
       </div>
-
+ 
       <!-- MONTH 2 -->
       <div class="month r r2">
         <div class="month-head">
@@ -897,7 +888,7 @@
           </div>
         </div>
       </div>
-
+ 
       <!-- MONTH 3 -->
       <div class="month r r3">
         <div class="month-head">
@@ -947,11 +938,11 @@
           </div>
         </div>
       </div>
-
+ 
     </div>
   </div>
 </section>
-
+ 
 <!-- 04 TEAM -->
 <section>
   <div class="container">
@@ -992,32 +983,32 @@
     </div>
   </div>
 </section>
-
+ 
 <footer>
   <div class="container">
     <div class="footer-row">
-      <div class="footer-brand">NexusPro · 2025</div>
+      <div class="footer-brand">NexusPro · 2026</div>
       <div class="footer-note">Стратегический документ · Конфиденциально</div>
     </div>
   </div>
 </footer>
-
-
-
+ 
+ 
+ 
   <button class="export-btn" onclick="exportPage()">Сохранить и скачать</button>
 </div>
-
+ 
 <script>
 (function() {
   let dragged = null;
   let placeholder = null;
-
+ 
   function createPlaceholder() {
     const el = document.createElement('div');
     el.className = 'task drag-placeholder';
     return el;
   }
-
+ 
   function addHandles() {
     document.querySelectorAll('.task[draggable]').forEach(task => {
       if (task.querySelector('.drag-handle')) return;
@@ -1027,7 +1018,7 @@
       task.appendChild(handle);
     });
   }
-
+ 
   document.addEventListener('dragstart', function(e) {
     const task = e.target.closest('.task[draggable]');
     if (!task) return;
@@ -1036,7 +1027,7 @@
     placeholder = createPlaceholder();
     e.dataTransfer.effectAllowed = 'move';
   });
-
+ 
   document.addEventListener('dragend', function(e) {
     const task = e.target.closest('.task[draggable]');
     if (!task) return;
@@ -1052,14 +1043,14 @@
       if (tasks.length > 0) tasks[tasks.length-1].style.borderBottom = 'none';
     });
   });
-
+ 
   document.addEventListener('dragover', function(e) {
     e.preventDefault();
     const body = e.target.closest('.month-body');
     if (!body || !dragged) return;
     document.querySelectorAll('.month-body').forEach(b => b.classList.remove('drag-over'));
     body.classList.add('drag-over');
-
+ 
     const afterEl = getDragAfterElement(body, e.clientY);
     if (placeholder.parentNode) placeholder.parentNode.removeChild(placeholder);
     if (afterEl == null) {
@@ -1068,20 +1059,20 @@
       body.insertBefore(placeholder, afterEl);
     }
   });
-
+ 
   document.addEventListener('dragleave', function(e) {
     const body = e.target.closest('.month-body');
     if (body && !body.contains(e.relatedTarget)) {
       body.classList.remove('drag-over');
     }
   });
-
+ 
   document.addEventListener('drop', function(e) {
     e.preventDefault();
     const body = e.target.closest('.month-body');
     if (!body || !dragged) return;
     body.classList.remove('drag-over');
-
+ 
     const afterEl = getDragAfterElement(body, e.clientY);
     if (placeholder.parentNode) placeholder.parentNode.removeChild(placeholder);
     if (afterEl == null) {
@@ -1091,7 +1082,7 @@
     }
     addHandles();
   });
-
+ 
   function getDragAfterElement(container, y) {
     const els = [...container.querySelectorAll('.task[draggable]:not(.dragging):not(.drag-placeholder)')];
     return els.reduce((closest, child) => {
@@ -1103,15 +1094,15 @@
       return closest;
     }, { offset: Number.NEGATIVE_INFINITY }).element;
   }
-
+ 
   window.addEventListener('DOMContentLoaded', addHandles);
 })();
 </script>
-
-
-
-
-
+ 
+ 
+ 
+ 
+ 
 <div class="share-panel" id="sharePanel">
   <div class="share-info">
     <strong>Поделиться с комментариями</strong>
@@ -1125,20 +1116,20 @@
     </div>
   </div>
 </div>
-
+ 
 <button class="floating-share-btn" id="floatShareBtn" onclick="openShare()">
   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
   Поделиться
 </button>
-
-
+ 
+ 
 <script>
 (function() {
   // ── ANNOTATION SYSTEM ──────────────────────────────────────────
   const annotations = {};
   let annotationCount = 0;
   let hasAnnotations = false;
-
+ 
   // Load from URL hash on page load
   function loadFromHash() {
     try {
@@ -1149,19 +1140,19 @@
       hasAnnotations = Object.keys(annotations).length > 0;
     } catch(e) {}
   }
-
+ 
   function saveToHash() {
     const json = JSON.stringify(annotations);
     const encoded = btoa(encodeURIComponent(json));
     history.replaceState(null, '', '#' + encoded);
   }
-
+ 
   function getShareUrl() {
     const json = JSON.stringify(annotations);
     const encoded = btoa(encodeURIComponent(json));
     return window.location.origin + window.location.pathname + '#' + encoded;
   }
-
+ 
   // ── ANNOTATABLE ELEMENTS ────────────────────────────────────────
   const SELECTORS = [
     { sel: '.vblock', label: 'блок видения' },
@@ -1170,16 +1161,16 @@
     { sel: '.month-head', label: 'месяц' },
     { sel: '.tcard', label: 'роль в команде' },
   ];
-
+ 
   function initAnnotations() {
     loadFromHash();
-
+ 
     SELECTORS.forEach(({ sel }) => {
       document.querySelectorAll(sel).forEach((el, i) => {
         const id = sel.replace(/[^a-z]/g,'') + i;
         el.dataset.annotId = id;
         el.style.position = 'relative';
-
+ 
         // Marker button
         const marker = document.createElement('button');
         marker.className = 'annotation-marker' + (annotations[id] ? ' active' : '');
@@ -1187,7 +1178,7 @@
         marker.title = 'Добавить комментарий';
         marker.onclick = (e) => { e.stopPropagation(); toggleBubble(el, id, marker, bubble); };
         el.appendChild(marker);
-
+ 
         // Bubble
         const bubble = document.createElement('div');
         bubble.className = 'annotation-bubble';
@@ -1203,21 +1194,21 @@
         `;
         bubble.onclick = e => e.stopPropagation();
         el.appendChild(bubble);
-
+ 
         // Saved display
         if (annotations[id]) {
           renderSavedAnnotation(el, id);
         }
       });
     });
-
+ 
     // Close bubbles on outside click
     document.addEventListener('click', closeAllBubbles);
-
+ 
     // Show float btn if annotations exist
     updateFloatBtn();
   }
-
+ 
   function toggleBubble(el, id, marker, bubble) {
     const isOpen = bubble.classList.contains('open');
     closeAllBubbles();
@@ -1226,27 +1217,27 @@
       marker.classList.add('active');
     }
   }
-
+ 
   function closeAllBubbles() {
     document.querySelectorAll('.annotation-bubble.open').forEach(b => {
       b.classList.remove('open');
     });
   }
-
+ 
   window.closeBubble = function(btn) {
     btn.closest('.annotation-bubble').classList.remove('open');
   };
-
+ 
   window.saveAnnotation = function(id, btn) {
     const bubble = btn.closest('.annotation-bubble');
     const text = bubble.querySelector('.ab-text').value.trim();
     const author = bubble.querySelector('.ab-name').value.trim() || 'Руководитель';
     if (!text) return;
-
+ 
     annotations[id] = { text, author, ts: Date.now() };
     saveToHash();
     hasAnnotations = true;
-
+ 
     // Update marker
     const el = document.querySelector(`[data-annot-id="${id}"]`);
     if (el) {
@@ -1254,15 +1245,15 @@
       if (marker) { marker.classList.add('active'); marker.innerHTML = '💬'; }
       renderSavedAnnotation(el, id);
     }
-
+ 
     bubble.classList.remove('open');
     updateFloatBtn();
   };
-
+ 
   window.deleteAnnotation = function(id, btn) {
     delete annotations[id];
     saveToHash();
-
+ 
     const el = document.querySelector(`[data-annot-id="${id}"]`);
     if (el) {
       const marker = el.querySelector('.annotation-marker');
@@ -1270,12 +1261,12 @@
       const saved = el.querySelector('.annotation-saved');
       if (saved) saved.remove();
     }
-
+ 
     btn.closest('.annotation-bubble').classList.remove('open');
     hasAnnotations = Object.keys(annotations).length > 0;
     updateFloatBtn();
   };
-
+ 
   function renderSavedAnnotation(el, id) {
     let saved = el.querySelector('.annotation-saved');
     if (!saved) {
@@ -1290,14 +1281,14 @@
     saved.innerHTML = `<span class="ann-author">${ann.author}</span>${ann.text.replace(/
 /g,'<br>')}`;
   }
-
+ 
   function updateFloatBtn() {
     const btn = document.getElementById('floatShareBtn');
     if (!btn) return;
     if (hasAnnotations) btn.classList.add('visible');
     else btn.classList.remove('visible');
   }
-
+ 
   // ── SHARE ────────────────────────────────────────────────────────
   window.openShare = function() {
     const panel = document.getElementById('sharePanel');
@@ -1306,12 +1297,12 @@
     panel.classList.add('visible');
     document.getElementById('floatShareBtn').classList.remove('visible');
   };
-
+ 
   window.closeShare = function() {
     document.getElementById('sharePanel').classList.remove('visible');
     updateFloatBtn();
   };
-
+ 
   window.copyShareUrl = function() {
     const input = document.getElementById('shareUrlInput');
     input.select();
@@ -1321,10 +1312,10 @@
       setTimeout(() => btn.textContent = 'Скопировать', 2000);
     });
   };
-
+ 
   window.addEventListener('DOMContentLoaded', initAnnotations);
 })();
 </script>
-
+ 
 </body>
 </html>
