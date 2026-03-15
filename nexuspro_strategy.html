@@ -480,9 +480,6 @@
   }
   .pdf-btn:hover { opacity: 0.85; transform: translateY(-1px); }
   .pdf-btn svg { flex-shrink: 0; }
-
-  @media print {
-    body { background: #fff !important; color: #111 !important; }
     body::before { display: none; }
     .pdf-btn { display: none !important; }
     .drag-handle { display: none !important; }
@@ -810,10 +807,23 @@
       <div class="footer-note">Стратегический документ · Конфиденциально</div>
     </div>
     <div style="margin-top:24px;">
-      <button class="pdf-btn" onclick="window.print()">
+      <button class="pdf-btn" onclick="downloadPDF()">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
         Скачать PDF
       </button>
+
+      <!-- Confirmation modal -->
+      <div id="pdfModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:500;align-items:center;justify-content:center;">
+        <div style="background:var(--surface-2);border:1px solid var(--teal-border);padding:36px 40px;max-width:420px;width:90%;border-radius:3px;position:relative;">
+          <div style="font-family:'Unbounded',sans-serif;font-size:10px;color:var(--teal);letter-spacing:2px;text-transform:uppercase;margin-bottom:14px;">Скачать документ</div>
+          <div style="font-size:15px;color:var(--white);font-weight:500;margin-bottom:10px;line-height:1.4;">NexusPro — Стратегия роста 2026–2029</div>
+          <div style="font-size:13px;color:var(--text-muted);margin-bottom:28px;line-height:1.7;">Вы скачаете PDF-версию стратегического документа. Файл будет сохранён на ваше устройство.</div>
+          <div style="display:flex;gap:10px;">
+            <button class="confirm-btn" onclick="confirmDownload()" style="font-family:'Unbounded',sans-serif;font-size:10px;letter-spacing:1px;background:var(--teal);color:var(--bg-deep);border:none;padding:11px 24px;cursor:pointer;border-radius:1px;flex:1;transition:opacity 0.2s;">Скачать</button>
+            <button onclick="closeModal()" style="font-family:'Unbounded',sans-serif;font-size:10px;letter-spacing:0.5px;background:transparent;color:var(--text-muted);border:1px solid var(--border);padding:11px 20px;cursor:pointer;border-radius:1px;">Отмена</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </footer>
@@ -925,6 +935,58 @@
 </script>
 
 
+
+
+<script>
+  const PDF_URL = 'https://raw.githubusercontent.com/nuriya-mir/np_strategy/main/nexuspro_strategy.pdf';
+  const PDF_FILENAME = 'NexusPro_Strategy_2026.pdf';
+
+  function downloadPDF() {
+    document.getElementById('pdfModal').style.display = 'flex';
+  }
+
+  function closeModal() {
+    document.getElementById('pdfModal').style.display = 'none';
+  }
+
+  function confirmDownload() {
+    const btn = document.querySelector('#pdfModal .confirm-btn');
+    btn.textContent = 'Загрузка...';
+    btn.disabled = true;
+
+    fetch(PDF_URL)
+      .then(res => {
+        if (!res.ok) throw new Error('Ошибка загрузки');
+        return res.blob();
+      })
+      .then(blob => {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = PDF_FILENAME;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        closeModal();
+        btn.textContent = 'Скачать';
+        btn.disabled = false;
+      })
+      .catch(() => {
+        // Fallback — open in new tab
+        window.open(PDF_URL, '_blank');
+        closeModal();
+        btn.textContent = 'Скачать';
+        btn.disabled = false;
+      });
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('pdfModal').addEventListener('click', function(e) {
+      if (e.target === this) closeModal();
+    });
+  });
+</script>
 
 </body>
 </html>
