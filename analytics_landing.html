@@ -1,0 +1,2105 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NexusPro Analytics — Управляемый рост продаж для бизнеса</title>
+<meta name="description" content="Система принятия решений для малого и среднего бизнеса. Свяжите рекламу с реальными продажами в одном окне за 10 секунд.">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;600;700;900&family=Geologica:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════ RESET & VARIABLES ═══════════════════ */
+:root {
+  --teal: #00B8A2;
+  --teal-light: #00D4BB;
+  --teal-dark: #009A87;
+  --teal-glow: rgba(0, 184, 162, 0.15);
+  --teal-subtle: rgba(0, 184, 162, 0.08);
+  --teal-border: rgba(0, 184, 162, 0.25);
+
+  --bg: #0D1117;
+  --bg-surface: #161B22;
+  --bg-card: #1C2230;
+  --bg-card-hover: #222938;
+  --bg-input: #0D1117;
+
+  --text: #E2E8F0;
+  --text-secondary: #8B9CB6;
+  --text-muted: #4A5568;
+  --white: #F7FAFC;
+
+  --border: rgba(255,255,255,0.06);
+  --border-hover: rgba(0,184,162,0.3);
+
+  --radius: 12px;
+  --radius-lg: 20px;
+  --shadow: 0 4px 24px rgba(0,0,0,0.3);
+  --shadow-lg: 0 12px 48px rgba(0,0,0,0.4);
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Geologica', sans-serif;
+  font-weight: 300;
+  line-height: 1.7;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Grid background */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0,184,162,0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,184,162,0.015) 1px, transparent 1px);
+  background-size: 80px 80px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ═══════════════════ TYPOGRAPHY ═══════════════════ */
+h1, h2, h3, h4 {
+  font-family: 'Unbounded', sans-serif;
+  line-height: 1.2;
+  color: var(--white);
+}
+
+h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700; }
+h2 { font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 600; }
+h3 { font-size: clamp(1.1rem, 2vw, 1.4rem); font-weight: 500; }
+h4 { font-size: 1rem; font-weight: 500; }
+
+p { font-size: clamp(0.95rem, 1.5vw, 1.1rem); }
+
+.accent { color: var(--teal); }
+.muted { color: var(--text-secondary); }
+
+/* ═══════════════════ LAYOUT ═══════════════════ */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  position: relative;
+  z-index: 1;
+}
+
+section {
+  padding: 100px 0;
+  position: relative;
+}
+
+/* ═══════════════════ BUTTONS ═══════════════════ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 32px;
+  border-radius: 50px;
+  font-family: 'Geologica', sans-serif;
+  font-weight: 500;
+  font-size: 1rem;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: var(--transition);
+  letter-spacing: 0.01em;
+}
+
+.btn-primary {
+  background: var(--teal);
+  color: #fff;
+  box-shadow: 0 0 30px rgba(0,184,162,0.25);
+}
+.btn-primary:hover {
+  background: var(--teal-light);
+  box-shadow: 0 0 50px rgba(0,184,162,0.4);
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--teal);
+  border: 1px solid var(--teal-border);
+}
+.btn-secondary:hover {
+  background: var(--teal-subtle);
+  border-color: var(--teal);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-secondary);
+  padding: 8px 16px;
+  font-size: 0.9rem;
+}
+.btn-ghost:hover { color: var(--teal); }
+
+/* ═══════════════════ HEADER / NAV ═══════════════════ */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 16px 0;
+  transition: var(--transition);
+  background: transparent;
+}
+
+header.scrolled {
+  background: rgba(13,17,23,0.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  padding: 10px 0;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.logo img {
+  height: 36px;
+  width: 36px;
+  border-radius: 8px;
+}
+
+.logo-text {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--white);
+}
+
+.logo-tag {
+  font-size: 0.7rem;
+  color: var(--teal);
+  background: var(--teal-subtle);
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  list-style: none;
+}
+
+.nav-links a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 400;
+  transition: var(--transition);
+}
+.nav-links a:hover { color: var(--teal); }
+
+.nav-cta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 8px;
+}
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--text);
+  transition: var(--transition);
+  border-radius: 2px;
+}
+
+/* ═══════════════════ HERO ═══════════════════ */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-top: 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -20%;
+  right: -10%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(0,184,162,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-content {
+  max-width: 720px;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  background: var(--teal-subtle);
+  border: 1px solid var(--teal-border);
+  border-radius: 50px;
+  font-size: 0.85rem;
+  color: var(--teal);
+  margin-bottom: 28px;
+  font-weight: 400;
+}
+
+.hero-badge::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: var(--teal);
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.hero h1 {
+  margin-bottom: 24px;
+  letter-spacing: -0.02em;
+}
+
+.hero h1 .line-break { display: block; }
+
+.hero-sub {
+  font-size: clamp(1.05rem, 1.8vw, 1.2rem);
+  color: var(--text-secondary);
+  margin-bottom: 40px;
+  max-width: 560px;
+  line-height: 1.8;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 48px;
+}
+
+.hero-proof {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.hero-proof-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-proof-value {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--teal);
+}
+
+.hero-proof-label {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* ═══════════════════ PAIN POINTS ═══════════════════ */
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--teal);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 16px;
+}
+
+.section-label::before {
+  content: '';
+  width: 24px;
+  height: 1px;
+  background: var(--teal);
+}
+
+.section-title {
+  margin-bottom: 20px;
+}
+
+.section-desc {
+  color: var(--text-secondary);
+  max-width: 640px;
+  margin-bottom: 56px;
+}
+
+.pain-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+.pain-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 32px;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.pain-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--teal), transparent);
+  opacity: 0;
+  transition: var(--transition);
+}
+
+.pain-card:hover {
+  border-color: var(--teal-border);
+  background: var(--bg-card-hover);
+}
+.pain-card:hover::before { opacity: 1; }
+
+.pain-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: var(--teal-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  font-size: 1.3rem;
+}
+
+.pain-card h3 {
+  margin-bottom: 10px;
+  font-size: 1.05rem;
+}
+
+.pain-card p {
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  line-height: 1.7;
+}
+
+/* ═══════════════════ WHAT IS ANALYTICS ═══════════════════ */
+.what-is {
+  background: var(--bg-surface);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.what-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.what-visual {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 40px;
+  position: relative;
+}
+
+.dashboard-mock {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.mock-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.mock-metric {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px;
+  text-align: center;
+}
+
+.mock-metric .value {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--teal);
+  display: block;
+}
+
+.mock-metric .label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.mock-funnel {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  height: 120px;
+  padding-top: 16px;
+}
+
+.funnel-bar {
+  flex: 1;
+  border-radius: 6px 6px 0 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  transition: var(--transition);
+}
+
+.funnel-bar .bar-fill {
+  width: 100%;
+  border-radius: 6px 6px 0 0;
+  transition: var(--transition);
+}
+
+.funnel-bar .bar-label {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  margin-top: 6px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.funnel-bar .bar-value {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 0.7rem;
+  color: var(--teal);
+  margin-bottom: 4px;
+}
+
+.what-text h2 { margin-bottom: 24px; }
+.what-text p { margin-bottom: 20px; color: var(--text-secondary); }
+
+.what-highlights {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 32px;
+}
+
+.highlight-item {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.highlight-check {
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  border-radius: 8px;
+  background: var(--teal-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--teal);
+  font-size: 0.85rem;
+  margin-top: 2px;
+}
+
+.highlight-item p {
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+/* ═══════════════════ FEATURES ═══════════════════ */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.feature-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 36px 28px;
+  transition: var(--transition);
+  position: relative;
+}
+
+.feature-card:hover {
+  border-color: var(--teal-border);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow);
+}
+
+.feature-number {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: rgba(0,184,162,0.1);
+  position: absolute;
+  top: 16px;
+  right: 20px;
+}
+
+.feature-card h3 {
+  margin-bottom: 12px;
+  font-size: 1.05rem;
+}
+
+.feature-card p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+.feature-tag {
+  display: inline-block;
+  margin-top: 16px;
+  font-size: 0.75rem;
+  color: var(--teal);
+  background: var(--teal-subtle);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-weight: 500;
+}
+
+/* ═══════════════════ HOW IT WORKS ═══════════════════ */
+.how-it-works {
+  background: var(--bg-surface);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.steps-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  position: relative;
+}
+
+.steps-container::before {
+  content: '';
+  position: absolute;
+  top: 44px;
+  left: 15%;
+  right: 15%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--teal-border), var(--teal), var(--teal-border));
+  z-index: 0;
+}
+
+.step {
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.step-number {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 2px solid var(--teal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 24px;
+  font-family: 'Unbounded', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--teal);
+  box-shadow: 0 0 30px rgba(0,184,162,0.15);
+}
+
+.step h3 { margin-bottom: 12px; }
+
+.step p {
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  max-width: 280px;
+  margin: 0 auto;
+}
+
+.step-time {
+  display: inline-block;
+  margin-top: 14px;
+  font-size: 0.8rem;
+  color: var(--teal);
+  font-weight: 500;
+  background: var(--teal-subtle);
+  padding: 4px 14px;
+  border-radius: 20px;
+}
+
+/* ═══════════════════ CASE STUDY ═══════════════════ */
+.case-study {
+  position: relative;
+}
+
+.case-card {
+  background: var(--bg-card);
+  border: 1px solid var(--teal-border);
+  border-radius: var(--radius-lg);
+  padding: 56px;
+  position: relative;
+  overflow: hidden;
+}
+
+.case-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--teal), var(--teal-light), var(--teal));
+}
+
+.case-header {
+  margin-bottom: 40px;
+}
+
+.case-label {
+  font-size: 0.8rem;
+  color: var(--teal);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.case-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 36px;
+}
+
+.case-metric {
+  background: var(--bg);
+  border-radius: var(--radius);
+  padding: 28px;
+  text-align: center;
+  border: 1px solid var(--border);
+}
+
+.case-metric .big-num {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  display: block;
+}
+
+.case-metric .big-num.red { color: #FF6B6B; }
+.case-metric .big-num.teal { color: var(--teal); }
+.case-metric .big-num.gold { color: #FFD93D; }
+
+.case-metric .metric-label {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-top: 8px;
+  line-height: 1.5;
+}
+
+.case-story {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+
+.case-before, .case-after {
+  padding: 28px;
+  border-radius: var(--radius);
+}
+
+.case-before {
+  background: rgba(255,107,107,0.05);
+  border: 1px solid rgba(255,107,107,0.15);
+}
+
+.case-after {
+  background: var(--teal-subtle);
+  border: 1px solid var(--teal-border);
+}
+
+.case-before h4, .case-after h4 {
+  margin-bottom: 12px;
+  font-size: 0.9rem;
+}
+
+.case-before h4 { color: #FF6B6B; }
+.case-after h4 { color: var(--teal); }
+
+.case-before p, .case-after p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+/* ═══════════════════ BARRIERS / OBJECTIONS ═══════════════════ */
+.barriers-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.barrier-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 36px;
+  text-align: center;
+  transition: var(--transition);
+}
+
+.barrier-card:hover {
+  border-color: var(--teal-border);
+}
+
+.barrier-myth {
+  font-size: 0.85rem;
+  color: #FF6B6B;
+  text-decoration: line-through;
+  margin-bottom: 16px;
+  font-style: italic;
+}
+
+.barrier-icon {
+  font-size: 2.5rem;
+  margin-bottom: 16px;
+}
+
+.barrier-card h3 {
+  color: var(--teal);
+  margin-bottom: 12px;
+}
+
+.barrier-card p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+/* ═══════════════════ PRICING ═══════════════════ */
+.pricing {
+  background: var(--bg-surface);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.pricing-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 40px;
+  position: relative;
+  transition: var(--transition);
+}
+
+.pricing-card.popular {
+  border-color: var(--teal);
+  box-shadow: 0 0 40px rgba(0,184,162,0.1);
+}
+
+.pricing-popular-badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--teal);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 4px 20px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.pricing-period {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--white);
+  margin-bottom: 8px;
+}
+
+.pricing-price {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  margin-bottom: 4px;
+}
+
+.pricing-amount {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--teal);
+}
+
+.pricing-currency {
+  font-size: 1rem;
+  color: var(--text-secondary);
+}
+
+.pricing-monthly {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+}
+
+.pricing-discount {
+  display: inline-block;
+  background: var(--teal-subtle);
+  color: var(--teal);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-bottom: 24px;
+}
+
+.pricing-features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.pricing-features li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.pricing-features li::before {
+  content: '✓';
+  color: var(--teal);
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.pricing-note {
+  text-align: center;
+  margin-top: 32px;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.pricing-daily {
+  text-align: center;
+  margin-top: 16px;
+  font-family: 'Unbounded', sans-serif;
+  font-size: 1.1rem;
+  color: var(--teal);
+}
+
+/* ═══════════════════ FAQ ═══════════════════ */
+.faq-list {
+  max-width: 760px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.faq-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: var(--transition);
+}
+
+.faq-item.open {
+  border-color: var(--teal-border);
+}
+
+.faq-question {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22px 28px;
+  cursor: pointer;
+  transition: var(--transition);
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  font-family: 'Geologica', sans-serif;
+  color: var(--text);
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.faq-question:hover { color: var(--teal); }
+
+.faq-arrow {
+  color: var(--teal);
+  font-size: 1.2rem;
+  transition: var(--transition);
+  min-width: 20px;
+}
+
+.faq-item.open .faq-arrow { transform: rotate(180deg); }
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.3s ease;
+}
+
+.faq-answer-inner {
+  padding: 0 28px 24px;
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  line-height: 1.8;
+}
+
+/* ═══════════════════ FINAL CTA / FORM ═══════════════════ */
+.final-cta {
+  position: relative;
+  overflow: hidden;
+}
+
+.final-cta::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(circle, rgba(0,184,162,0.06) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.cta-wrapper {
+  max-width: 680px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.cta-wrapper h2 { margin-bottom: 16px; }
+.cta-wrapper > p { color: var(--text-secondary); margin-bottom: 48px; }
+
+/* Step Form */
+.step-form {
+  background: var(--bg-card);
+  border: 1px solid var(--teal-border);
+  border-radius: var(--radius-lg);
+  padding: 48px;
+  text-align: left;
+  position: relative;
+}
+
+.form-progress {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 36px;
+}
+
+.form-progress-bar {
+  flex: 1;
+  height: 4px;
+  border-radius: 4px;
+  background: var(--border);
+  transition: var(--transition);
+}
+
+.form-progress-bar.active {
+  background: var(--teal);
+}
+
+.form-step {
+  display: none;
+}
+
+.form-step.active {
+  display: block;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.form-step h3 {
+  margin-bottom: 8px;
+}
+
+.form-step .step-desc {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-bottom: 24px;
+}
+
+.form-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.form-option {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px 20px;
+  cursor: pointer;
+  transition: var(--transition);
+  font-family: 'Geologica', sans-serif;
+  font-size: 0.92rem;
+  color: var(--text);
+  text-align: center;
+}
+
+.form-option:hover, .form-option.selected {
+  border-color: var(--teal);
+  background: var(--teal-subtle);
+  color: var(--teal);
+}
+
+.form-input {
+  width: 100%;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 20px;
+  font-family: 'Geologica', sans-serif;
+  font-size: 0.95rem;
+  color: var(--text);
+  transition: var(--transition);
+  margin-bottom: 12px;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--teal);
+  box-shadow: 0 0 0 3px rgba(0,184,162,0.1);
+}
+
+.form-input::placeholder { color: var(--text-muted); }
+
+textarea.form-input {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.form-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 24px;
+}
+
+.form-success {
+  display: none;
+  text-align: center;
+  padding: 40px;
+}
+
+.form-success.active { display: block; }
+
+.success-icon {
+  font-size: 3rem;
+  margin-bottom: 16px;
+}
+
+/* ═══════════════════ FOOTER ═══════════════════ */
+footer {
+  padding: 40px 0;
+  border-top: 1px solid var(--border);
+  text-align: center;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.footer-copy {
+  color: var(--text-muted);
+  font-size: 0.82rem;
+}
+
+.footer-links {
+  display: flex;
+  gap: 24px;
+  list-style: none;
+}
+
+.footer-links a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.82rem;
+  transition: var(--transition);
+}
+.footer-links a:hover { color: var(--teal); }
+
+/* ═══════════════════ SCROLL ANIMATIONS ═══════════════════ */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ═══════════════════ MOBILE NAV MENU ═══════════════════ */
+.mobile-menu {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(13,17,23,0.97);
+  backdrop-filter: blur(20px);
+  z-index: 999;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+}
+
+.mobile-menu.open { display: flex; }
+
+.mobile-menu a {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 1.3rem;
+  color: var(--text);
+  text-decoration: none;
+  transition: var(--transition);
+}
+.mobile-menu a:hover { color: var(--teal); }
+
+.mobile-close {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background: none;
+  border: none;
+  color: var(--text);
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+/* ═══════════════════ RESPONSIVE ═══════════════════ */
+@media (max-width: 1024px) {
+  .features-grid { grid-template-columns: repeat(2, 1fr); }
+  .what-grid { grid-template-columns: 1fr; gap: 40px; }
+  .case-card { padding: 36px; }
+}
+
+@media (max-width: 768px) {
+  section { padding: 64px 0; }
+
+  .nav-links, .nav-cta { display: none; }
+  .hamburger { display: flex; }
+
+  .features-grid,
+  .barriers-grid,
+  .steps-container,
+  .case-metrics,
+  .case-story { grid-template-columns: 1fr; }
+
+  .steps-container::before { display: none; }
+
+  .pricing-grid { grid-template-columns: 1fr; max-width: 420px; }
+
+  .pain-grid { grid-template-columns: 1fr; }
+
+  .hero-proof { gap: 24px; }
+
+  .form-options { grid-template-columns: 1fr; }
+
+  .case-card { padding: 24px; }
+
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .container { padding: 0 16px; }
+  .step-form { padding: 28px 20px; }
+  .mock-row { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════ HEADER ═══════════ -->
+<header id="header">
+  <div class="container">
+    <nav>
+      <a href="#" class="logo">
+        <img src="logoNexusPro .png" alt="NexusPro" onerror="this.style.display='none'">
+        <span class="logo-text">NexusPro</span>
+        <span class="logo-tag">Analytics</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#problems">Проблемы</a></li>
+        <li><a href="#product">Продукт</a></li>
+        <li><a href="#features">Возможности</a></li>
+        <li><a href="#case">Кейс</a></li>
+        <li><a href="#pricing">Цены</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+
+      <div class="nav-cta">
+        <a href="#contact" class="btn btn-primary" style="padding: 10px 24px; font-size: 0.9rem;">Попробовать бесплатно</a>
+      </div>
+
+      <button class="hamburger" id="hamburgerBtn" aria-label="Меню">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="mobileClose">&times;</button>
+  <a href="#problems" onclick="closeMobile()">Проблемы</a>
+  <a href="#product" onclick="closeMobile()">Продукт</a>
+  <a href="#features" onclick="closeMobile()">Возможности</a>
+  <a href="#case" onclick="closeMobile()">Кейс</a>
+  <a href="#pricing" onclick="closeMobile()">Цены</a>
+  <a href="#faq" onclick="closeMobile()">FAQ</a>
+  <a href="#contact" class="btn btn-primary" onclick="closeMobile()">Попробовать бесплатно</a>
+</div>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-badge">Для малого и среднего бизнеса Казахстана</div>
+
+      <h1>
+        Увидьте, что приносит деньги,
+        <span class="line-break"><span class="accent">а что — только расходы</span></span>
+      </h1>
+
+      <p class="hero-sub">
+        Свяжите рекламу с реальными продажами в одном окне. Без сложных настроек, без дорогих аналитиков — за&nbsp;10&nbsp;секунд получите полную картину вашего бизнеса.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#contact" class="btn btn-primary">Попробовать 7 дней бесплатно →</a>
+        <a href="#product" class="btn btn-secondary">Как это работает</a>
+      </div>
+
+      <div class="hero-proof">
+        <div class="hero-proof-item">
+          <span class="hero-proof-value">10 сек</span>
+          <span class="hero-proof-label">чтобы увидеть главное</span>
+        </div>
+        <div class="hero-proof-item">
+          <span class="hero-proof-value">1 час</span>
+          <span class="hero-proof-label">на подключение</span>
+        </div>
+        <div class="hero-proof-item">
+          <span class="hero-proof-value">220 ₸/день</span>
+          <span class="hero-proof-label">стоимость системы</span>
+        </div>
+        <div class="hero-proof-item">
+          <span class="hero-proof-value">75%</span>
+          <span class="hero-proof-label">клиентов остаются</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ PAIN POINTS ═══════════ -->
+<section id="problems">
+  <div class="container">
+    <div class="section-label">Знакомо?</div>
+    <h2 class="section-title reveal">Вы работаете в CRM, запускаете рекламу...<br><span class="accent">но не видите полной картины</span></h2>
+    <p class="section-desc reveal">Каждый из этих вопросов стоит бизнесу денег. Если хотя бы два из пяти — про вас, Analytics решит проблему.</p>
+
+    <div class="pain-grid">
+      <div class="pain-card reveal">
+        <div class="pain-icon">📊</div>
+        <h3>«Не знаю, какой канал приносит клиентов»</h3>
+        <p>Вы видите лиды из рекламы, но не знаете — какие из них дошли до оплаты. CRM показывает сделки, реклама — клики. Связи между ними нет.</p>
+      </div>
+
+      <div class="pain-card reveal">
+        <div class="pain-icon">🕳️</div>
+        <h3>«Не понимаю, где именно теряются клиенты»</h3>
+        <p>Лиды приходят, но до продажи доходит мало. Где утечка — на этапе квалификации? Встречи? Повторного контакта? CRM этого не покажет.</p>
+      </div>
+
+      <div class="pain-card reveal">
+        <div class="pain-icon">🎯</div>
+        <h3>«Не могу быстро сказать, сколько лидов нужно в день»</h3>
+        <p>Чтобы сделать 5 млн ₸ в месяц — сколько нужно встреч? Лидов? Звонков? Каждый раз считаете вручную, и числа не сходятся.</p>
+      </div>
+
+      <div class="pain-card reveal">
+        <div class="pain-icon">⏱️</div>
+        <h3>«Сборка отчётов занимает часы»</h3>
+        <p>Каждую неделю кто-то вручную собирает данные из CRM, рекламного кабинета, таблиц. Данные устаревают, пока их собирают.</p>
+      </div>
+
+      <div class="pain-card reveal">
+        <div class="pain-icon">🎲</div>
+        <h3>«Решения принимаю на ощущениях»</h3>
+        <p>Кажется, что Instagram работает лучше. Кажется, что Айдар закрывает больше сделок. Но «кажется» — не факт. А факты разбросаны по разным системам.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ WHAT IS ANALYTICS ═══════════ -->
+<section id="product" class="what-is">
+  <div class="container">
+    <div class="what-grid">
+      <div class="what-visual reveal">
+        <div class="dashboard-mock">
+          <div class="mock-row">
+            <div class="mock-metric">
+              <span class="value">47</span>
+              <span class="label">Новые сделки</span>
+            </div>
+            <div class="mock-metric">
+              <span class="value">12</span>
+              <span class="label">Выиграно</span>
+            </div>
+            <div class="mock-metric">
+              <span class="value">3.2M</span>
+              <span class="label">Выручка ₸</span>
+            </div>
+          </div>
+          <div class="mock-funnel">
+            <div class="funnel-bar">
+              <span class="bar-value">231</span>
+              <div class="bar-fill" style="height: 100%; background: var(--teal);"></div>
+              <span class="bar-label">Лиды</span>
+            </div>
+            <div class="funnel-bar">
+              <span class="bar-value">156</span>
+              <div class="bar-fill" style="height: 68%; background: var(--teal); opacity: 0.8;"></div>
+              <span class="bar-label">Квалиф.</span>
+            </div>
+            <div class="funnel-bar">
+              <span class="bar-value">89</span>
+              <div class="bar-fill" style="height: 39%; background: var(--teal); opacity: 0.6;"></div>
+              <span class="bar-label">Встречи</span>
+            </div>
+            <div class="funnel-bar">
+              <span class="bar-value">34</span>
+              <div class="bar-fill" style="height: 15%; background: var(--teal); opacity: 0.4;"></div>
+              <span class="bar-label">КП</span>
+            </div>
+            <div class="funnel-bar">
+              <span class="bar-value">12</span>
+              <div class="bar-fill" style="height: 5%; background: #00D4BB;"></div>
+              <span class="bar-label">Продажи</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="what-text reveal">
+        <div class="section-label">Что такое Analytics</div>
+        <h2>Система принятия решений<br>для управления продажами</h2>
+        <p>NexusPro Analytics — это не CRM, не BI-платформа и не замена вашим инструментам. Это <strong style="color:var(--white)">слой управленческой аналитики</strong>, который собирает данные из CRM, рекламы и мессенджеров — и показывает вам факты, структуру и связи между ними.</p>
+        <p>Вы продолжаете работать в amoCRM, Bitrix24 или Google Sheets. Analytics автоматически подтягивает данные и превращает их в понятную картину.</p>
+
+        <div class="what-highlights">
+          <div class="highlight-item">
+            <div class="highlight-check">✓</div>
+            <p><strong style="color:var(--white)">Работает поверх CRM</strong> — не нужно менять процессы команды</p>
+          </div>
+          <div class="highlight-item">
+            <div class="highlight-check">✓</div>
+            <p><strong style="color:var(--white)">Связывает расходы и доходы</strong> — от клика в рекламе до оплаты</p>
+          </div>
+          <div class="highlight-item">
+            <div class="highlight-check">✓</div>
+            <p><strong style="color:var(--white)">Показывает факты, а не советы</strong> — вы видите реальные числа и сами решаете, что делать</p>
+          </div>
+          <div class="highlight-item">
+            <div class="highlight-check">✓</div>
+            <p><strong style="color:var(--white)">Создана практиками</strong> — мы сами строили отделы продаж, а не только писали код</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ FEATURES ═══════════ -->
+<section id="features">
+  <div class="container">
+    <div class="section-label">Возможности</div>
+    <h2 class="section-title reveal">Шесть инструментов<br><span class="accent">для управляемого роста</span></h2>
+    <p class="section-desc reveal">Каждый инструмент отвечает на конкретный управленческий вопрос. Вместе — дают полную картину.</p>
+
+    <div class="features-grid">
+      <div class="feature-card reveal">
+        <span class="feature-number">01</span>
+        <h3>Дашборд за 10 секунд</h3>
+        <p>Новые сделки, выигранные, проигранные, выручка, лучшие менеджеры — всё на одном экране. Открыл — увидел — понял.</p>
+        <span class="feature-tag">Ежедневный контроль</span>
+      </div>
+
+      <div class="feature-card reveal">
+        <span class="feature-number">02</span>
+        <h3>Декомпозиция воронки</h3>
+        <p>Когортный анализ: сколько лидов вошло, сколько квалифицировано, сколько дошло до встречи, сколько до оплаты. Видите, где именно теряются клиенты.</p>
+        <span class="feature-tag">Диагностика потерь</span>
+      </div>
+
+      <div class="feature-card reveal">
+        <span class="feature-number">03</span>
+        <h3>Обратное планирование</h3>
+        <p>Задайте цель по выручке — система автоматически рассчитает, сколько нужно лидов, встреч и сделок каждый день, чтобы план стал реальностью.</p>
+        <span class="feature-tag">От цели к действиям</span>
+      </div>
+
+      <div class="feature-card reveal">
+        <span class="feature-number">04</span>
+        <h3>Аналитика маркетинга</h3>
+        <p>Автоматическая выгрузка из Facebook Ads: стоимость лида, стоимость клиента, ROMI. Плюс Conversion API — реклама обучается на реальных покупателях, а не кликах.</p>
+        <span class="feature-tag">Связь расходов и дохода</span>
+      </div>
+
+      <div class="feature-card reveal">
+        <span class="feature-number">05</span>
+        <h3>Эффективность менеджеров</h3>
+        <p>Конверсия, скорость, объём — по каждому менеджеру. С фильтрацией по проектам. Видите, кто реально закрывает сделки, а кто двигает карточки.</p>
+        <span class="feature-tag">Прозрачность команды</span>
+      </div>
+
+      <div class="feature-card reveal">
+        <span class="feature-number">06</span>
+        <h3>AI-ассистент в Telegram</h3>
+        <p>Спросите голосом или текстом: «Сколько сделок закрыто в этом месяце?» — бот ответит по живым данным. Аналитика без открытия дашборда.</p>
+        <span class="feature-tag">Данные по запросу</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ HOW IT WORKS ═══════════ -->
+<section class="how-it-works">
+  <div class="container">
+    <div style="text-align:center; margin-bottom: 64px;">
+      <div class="section-label" style="justify-content:center;">Как подключить</div>
+      <h2 class="section-title reveal">Три шага — и вы видите<br><span class="accent">всю картину бизнеса</span></h2>
+    </div>
+
+    <div class="steps-container">
+      <div class="step reveal">
+        <div class="step-number">1</div>
+        <h3>Подключаем CRM</h3>
+        <p>Интегрируем Analytics с вашей amoCRM, Bitrix24 или другой системой. Данные начинают синхронизироваться автоматически.</p>
+        <span class="step-time">~1 час</span>
+      </div>
+
+      <div class="step reveal">
+        <div class="step-number">2</div>
+        <h3>Собираем данные</h3>
+        <p>В течение первой недели система накапливает данные по сделкам, лидам, рекламе и менеджерам. Воронка заполняется реальными числами.</p>
+        <span class="step-time">3–7 дней</span>
+      </div>
+
+      <div class="step reveal">
+        <div class="step-number">3</div>
+        <h3>Принимаете решения</h3>
+        <p>Вы видите факты: где теряются клиенты, какой канал приносит деньги, кто из менеджеров эффективен. Решения — за вами, но теперь на основе данных.</p>
+        <span class="step-time">каждый день</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ CASE STUDY ═══════════ -->
+<section id="case" class="case-study">
+  <div class="container">
+    <div class="section-label">Реальный кейс</div>
+    <h2 class="section-title reveal">Как аналитика обнаружила<br><span class="accent">потери на 56 млн ₸</span></h2>
+    <p class="section-desc reveal">Компания Kazna Consulting. Всё казалось нормальным — сделки шли, встречи назначались. Пока мы не декомпозировали воронку.</p>
+
+    <div class="case-card reveal">
+      <div class="case-metrics">
+        <div class="case-metric">
+          <span class="big-num red">231</span>
+          <span class="metric-label">встреч было<br>запланировано</span>
+        </div>
+        <div class="case-metric">
+          <span class="big-num gold">7</span>
+          <span class="metric-label">встреч реально<br>проведено</span>
+        </div>
+        <div class="case-metric">
+          <span class="big-num teal">~56M ₸</span>
+          <span class="metric-label">потенциальная<br>упущенная выручка</span>
+        </div>
+      </div>
+
+      <div class="case-story">
+        <div class="case-before">
+          <h4>До Analytics</h4>
+          <p>CRM показывала «встреча назначена». Руководитель видел: 231 запись — значит, отдел работает. Реальной конверсии из назначенных во&nbsp;встреченные никто не считал. Проблема была невидимой.</p>
+        </div>
+        <div class="case-after">
+          <h4>После Analytics</h4>
+          <p>Декомпозиция воронки показала факт: из 231 назначенной встречи проведено только 7. Конверсия — 3% вместо ожидаемых 90%. Один этот вопрос окупил систему и обнажил системную проблему процесса.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ BARRIERS ═══════════ -->
+<section id="barriers">
+  <div class="container">
+    <div style="text-align:center; margin-bottom: 56px;">
+      <div class="section-label" style="justify-content:center;">Частые сомнения</div>
+      <h2 class="section-title reveal">Три мифа, которые мешают<br><span class="accent">начать управлять по данным</span></h2>
+    </div>
+
+    <div class="barriers-grid">
+      <div class="barrier-card reveal">
+        <div class="barrier-icon">⚡</div>
+        <div class="barrier-myth">«Аналитика — это долго»</div>
+        <h3>Подключение за 1 час</h3>
+        <p>Интеграция с CRM занимает час. Первые данные — через неделю. Вашей команде не нужно менять ни одного процесса.</p>
+      </div>
+
+      <div class="barrier-card reveal">
+        <div class="barrier-icon">💰</div>
+        <div class="barrier-myth">«Настоящая аналитика — это дорого»</div>
+        <h3>220 ₸ в день</h3>
+        <p>Roistat стоит от 150 000 ₽/мес. NexusPro Analytics — от 16 000 ₸/мес с безлимитным количеством пользователей. Окупается за первый месяц.</p>
+      </div>
+
+      <div class="barrier-card reveal">
+        <div class="barrier-icon">🎓</div>
+        <div class="barrier-myth">«Нужен аналитик, чтобы разобраться»</div>
+        <h3>Понятно за 10 секунд</h3>
+        <p>Дашборд читается с первого взгляда. А если нужны данные на ходу — AI-бот в Telegram ответит на вопрос голосом.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ PRICING ═══════════ -->
+<section id="pricing" class="pricing">
+  <div class="container">
+    <div style="text-align:center; margin-bottom: 56px;">
+      <div class="section-label" style="justify-content:center;">Тарифы</div>
+      <h2 class="section-title reveal">Прозрачные цены.<br><span class="accent">Безлимит пользователей.</span></h2>
+      <p class="section-desc reveal" style="margin: 16px auto 0;">Один тариф — полный набор инструментов. Разница только в длительности и скидке.</p>
+    </div>
+
+    <div class="pricing-grid">
+      <div class="pricing-card reveal">
+        <div class="pricing-period">6 месяцев</div>
+        <div class="pricing-price">
+          <span class="pricing-amount">108 000</span>
+          <span class="pricing-currency">₸</span>
+        </div>
+        <div class="pricing-monthly">18 000 ₸ / месяц</div>
+        <div class="pricing-discount">Скидка 10%</div>
+        <ul class="pricing-features">
+          <li>Полный дашборд и воронка</li>
+          <li>Декомпозиция + обратное планирование</li>
+          <li>Аналитика маркетинга + Conversion API</li>
+          <li>Эффективность менеджеров</li>
+          <li>AI-ассистент в Telegram</li>
+          <li>Безлимит пользователей</li>
+        </ul>
+        <a href="#contact" class="btn btn-secondary" style="width:100%; justify-content:center;">Выбрать</a>
+      </div>
+
+      <div class="pricing-card popular reveal">
+        <div class="pricing-popular-badge">Выгоднее</div>
+        <div class="pricing-period">12 месяцев</div>
+        <div class="pricing-price">
+          <span class="pricing-amount">192 000</span>
+          <span class="pricing-currency">₸</span>
+        </div>
+        <div class="pricing-monthly">16 000 ₸ / месяц</div>
+        <div class="pricing-discount">Скидка 20%</div>
+        <ul class="pricing-features">
+          <li>Всё из тарифа на 6 месяцев</li>
+          <li>Календарь продаж (план/факт)</li>
+          <li>Календарь оплат и рассрочек</li>
+          <li>Архивирование в BigQuery</li>
+          <li>Приоритетная поддержка</li>
+          <li>Безлимит пользователей</li>
+        </ul>
+        <a href="#contact" class="btn btn-primary" style="width:100%; justify-content:center;">Выбрать</a>
+      </div>
+    </div>
+
+    <p class="pricing-daily reveal">Это 220 ₸ в день — дешевле чашки кофе</p>
+    <p class="pricing-note reveal">7–10 дней бесплатного тестирования на реальных данных вашего бизнеса</p>
+  </div>
+</section>
+
+<!-- ═══════════ FAQ ═══════════ -->
+<section id="faq">
+  <div class="container">
+    <div style="text-align:center; margin-bottom: 56px;">
+      <div class="section-label" style="justify-content:center;">Вопросы</div>
+      <h2 class="section-title reveal">Частые вопросы</h2>
+    </div>
+
+    <div class="faq-list">
+      <div class="faq-item reveal">
+        <button class="faq-question">
+          Чем Analytics отличается от отчётов в CRM?
+          <span class="faq-arrow">▾</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">CRM показывает, что происходит внутри воронки: сколько сделок, на каком этапе. Но CRM не знает, сколько стоил каждый клиент, какой рекламный канал его привёл, и не умеет связывать расходы на рекламу с реальными продажами. Analytics агрегирует данные из CRM, рекламных кабинетов и мессенджеров — и показывает связи, которых CRM не видит.</div>
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <button class="faq-question">
+          Нужно ли менять CRM или рабочие процессы?
+          <span class="faq-arrow">▾</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Нет. Analytics работает поверх вашей CRM — amoCRM, Bitrix24, kommoCRM или Google Sheets. Менеджеры продолжают работать как раньше. Данные синхронизируются автоматически, без ручного ввода.</div>
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <button class="faq-question">
+          Сколько времени займёт подключение?
+          <span class="faq-arrow">▾</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Техническая интеграция с CRM — около 1 часа. Первые данные появятся в течение 3–7 дней: системе нужно время, чтобы накопить достаточно информации для полной картины. Полная настройка и адаптация под ваш бизнес — в рамках пробного периода.</div>
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <button class="faq-question">
+          Analytics даёт рекомендации, что делать?
+          <span class="faq-arrow">▾</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Analytics показывает факты, организованные в структуру, и связи между ними. Мы осознанно не даём автоматических рекомендаций — потому что каждый бизнес уникален, и решение должен принимать предприниматель, который знает контекст. Наша задача — дать вам ясную картину, а не подменять ваше мышление.</div>
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <button class="faq-question">
+          Что если у меня маленькая команда (2–3 человека)?
+          <span class="faq-arrow">▾</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Analytics работает начиная от 3 сотрудников. Даже с маленькой командой вы получаете главное: понимание стоимости клиента по каналам, конверсии воронки и планирование от цели. Безлимит пользователей включён — подключайте всех, кому нужен доступ к данным.</div>
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <button class="faq-question">
+          Как быстро Analytics окупится?
+          <span class="faq-arrow">▾</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Как правило, за первый месяц. В первую неделю вы увидите реальную конверсию и эффективность менеджеров. К концу первого месяца — поймёте точную стоимость клиента по каналам и найдёте потери, которые раньше были невидимы. Если ваш бизнес теряет от 20 000 ₸ в месяц на неэффективности (а большинство теряет больше), Analytics окупается сразу.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ FINAL CTA + FORM ═══════════ -->
+<section id="contact" class="final-cta">
+  <div class="container">
+    <div class="cta-wrapper">
+      <div class="section-label" style="justify-content:center;">Начать</div>
+      <h2 class="reveal">Узнайте, что на самом деле<br><span class="accent">происходит в вашем бизнесе</span></h2>
+      <p class="reveal">Ответьте на 3 вопроса — мы подготовим персональный разбор и покажем, как Analytics решит вашу задачу.</p>
+
+      <div class="step-form reveal" id="stepForm">
+        <!-- Progress -->
+        <div class="form-progress">
+          <div class="form-progress-bar active" data-step="1"></div>
+          <div class="form-progress-bar" data-step="2"></div>
+          <div class="form-progress-bar" data-step="3"></div>
+        </div>
+
+        <!-- Step 1: Business type -->
+        <div class="form-step active" data-step="1">
+          <h3>Какая у вас сфера?</h3>
+          <p class="step-desc">Это поможет нам подготовить релевантный разбор</p>
+          <div class="form-options">
+            <div class="form-option" data-value="beauty">Бьюти / Салоны</div>
+            <div class="form-option" data-value="fitness">Фитнес</div>
+            <div class="form-option" data-value="education">Образование</div>
+            <div class="form-option" data-value="realestate">Недвижимость</div>
+            <div class="form-option" data-value="auto">Авто-бизнес</div>
+            <div class="form-option" data-value="services">Услуги / B2B</div>
+            <div class="form-option" data-value="retail">Розничная торговля</div>
+            <div class="form-option" data-value="other">Другое</div>
+          </div>
+          <div class="form-nav">
+            <span></span>
+            <button class="btn btn-primary" id="nextStep1" disabled>Далее →</button>
+          </div>
+        </div>
+
+        <!-- Step 2: Team & CRM -->
+        <div class="form-step" data-step="2">
+          <h3>Расскажите о команде</h3>
+          <p class="step-desc">Сколько человек в отделе продаж и какую CRM используете</p>
+          <div class="form-options" style="margin-bottom: 16px;">
+            <div class="form-option" data-value="1-3">1–3 человека</div>
+            <div class="form-option" data-value="4-10">4–10 человек</div>
+            <div class="form-option" data-value="11-20">11–20 человек</div>
+            <div class="form-option" data-value="20+">Более 20</div>
+          </div>
+          <select class="form-input" id="crmSelect" style="cursor:pointer;">
+            <option value="" disabled selected>Какую CRM используете?</option>
+            <option value="amocrm">amoCRM / kommoCRM</option>
+            <option value="bitrix">Bitrix24</option>
+            <option value="sheets">Google Sheets</option>
+            <option value="other_crm">Другую</option>
+            <option value="none">Пока без CRM</option>
+          </select>
+          <div class="form-nav">
+            <button class="btn btn-ghost" id="backStep2">← Назад</button>
+            <button class="btn btn-primary" id="nextStep2" disabled>Далее →</button>
+          </div>
+        </div>
+
+        <!-- Step 3: Contact -->
+        <div class="form-step" data-step="3">
+          <h3>Как с вами связаться?</h3>
+          <p class="step-desc">Мы свяжемся в течение 24 часов и предложим бесплатный тестовый период</p>
+          <input type="text" class="form-input" id="userName" placeholder="Ваше имя" required>
+          <input type="tel" class="form-input" id="userPhone" placeholder="+7 (___) ___-__-__" required>
+          <textarea class="form-input" id="userTask" placeholder="Опишите вашу главную задачу (необязательно)"></textarea>
+          <div class="form-nav">
+            <button class="btn btn-ghost" id="backStep3">← Назад</button>
+            <button class="btn btn-primary" id="submitForm">Отправить заявку →</button>
+          </div>
+        </div>
+
+        <!-- Success -->
+        <div class="form-success" id="formSuccess">
+          <div class="success-icon">✓</div>
+          <h3>Заявка отправлена</h3>
+          <p style="color: var(--text-secondary); margin-top: 12px;">Мы свяжемся с вами в течение 24 часов и предложим бесплатный тестовый период на данных вашего бизнеса.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer>
+  <div class="container">
+    <div class="footer-content">
+      <span class="footer-copy">© 2026 NexusPro Analytics. Караганда, Казахстан</span>
+      <ul class="footer-links">
+        <li><a href="#product">О продукте</a></li>
+        <li><a href="#pricing">Цены</a></li>
+        <li><a href="#contact">Связаться</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════ JAVASCRIPT ═══════════ -->
+<script>
+/* ── Header scroll effect ── */
+const header = document.getElementById('header');
+let lastScroll = 0;
+
+window.addEventListener('scroll', () => {
+  const scrollY = window.scrollY;
+  header.classList.toggle('scrolled', scrollY > 60);
+  lastScroll = scrollY;
+});
+
+/* ── Mobile menu ── */
+const hamburgerBtn = document.getElementById('hamburgerBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+const mobileClose = document.getElementById('mobileClose');
+
+hamburgerBtn.addEventListener('click', () => mobileMenu.classList.add('open'));
+mobileClose.addEventListener('click', () => mobileMenu.classList.remove('open'));
+
+function closeMobile() {
+  mobileMenu.classList.remove('open');
+}
+
+/* ── Scroll reveal ── */
+const revealElements = document.querySelectorAll('.reveal');
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+revealElements.forEach(el => revealObserver.observe(el));
+
+/* ── FAQ accordion ── */
+document.querySelectorAll('.faq-question').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.parentElement;
+    const answer = item.querySelector('.faq-answer');
+    const isOpen = item.classList.contains('open');
+
+    // Close all
+    document.querySelectorAll('.faq-item.open').forEach(openItem => {
+      openItem.classList.remove('open');
+      openItem.querySelector('.faq-answer').style.maxHeight = '0';
+    });
+
+    // Toggle current
+    if (!isOpen) {
+      item.classList.add('open');
+      answer.style.maxHeight = answer.scrollHeight + 'px';
+    }
+  });
+});
+
+/* ── Step Form Logic ── */
+const formData = {
+  industry: '',
+  teamSize: '',
+  crm: '',
+  name: '',
+  phone: '',
+  task: ''
+};
+
+let currentStep = 1;
+
+function updateProgress() {
+  document.querySelectorAll('.form-progress-bar').forEach(bar => {
+    const step = parseInt(bar.dataset.step);
+    bar.classList.toggle('active', step <= currentStep);
+  });
+}
+
+function showStep(step) {
+  document.querySelectorAll('.form-step').forEach(s => s.classList.remove('active'));
+  const target = document.querySelector(`.form-step[data-step="${step}"]`);
+  if (target) target.classList.add('active');
+  currentStep = step;
+  updateProgress();
+}
+
+// Step 1: Industry selection
+document.querySelectorAll('.form-step[data-step="1"] .form-option').forEach(opt => {
+  opt.addEventListener('click', () => {
+    document.querySelectorAll('.form-step[data-step="1"] .form-option').forEach(o => o.classList.remove('selected'));
+    opt.classList.add('selected');
+    formData.industry = opt.dataset.value;
+    document.getElementById('nextStep1').disabled = false;
+  });
+});
+
+// Step 2: Team size selection
+document.querySelectorAll('.form-step[data-step="2"] .form-option').forEach(opt => {
+  opt.addEventListener('click', () => {
+    document.querySelectorAll('.form-step[data-step="2"] .form-option').forEach(o => o.classList.remove('selected'));
+    opt.classList.add('selected');
+    formData.teamSize = opt.dataset.value;
+    checkStep2();
+  });
+});
+
+const crmSelect = document.getElementById('crmSelect');
+crmSelect.addEventListener('change', () => {
+  formData.crm = crmSelect.value;
+  checkStep2();
+});
+
+function checkStep2() {
+  document.getElementById('nextStep2').disabled = !(formData.teamSize && formData.crm);
+}
+
+// Navigation
+document.getElementById('nextStep1').addEventListener('click', () => showStep(2));
+document.getElementById('nextStep2').addEventListener('click', () => showStep(3));
+document.getElementById('backStep2').addEventListener('click', () => showStep(1));
+document.getElementById('backStep3').addEventListener('click', () => showStep(2));
+
+// Submit
+document.getElementById('submitForm').addEventListener('click', () => {
+  const name = document.getElementById('userName').value.trim();
+  const phone = document.getElementById('userPhone').value.trim();
+
+  if (!name || !phone) {
+    alert('Пожалуйста, заполните имя и телефон');
+    return;
+  }
+
+  formData.name = name;
+  formData.phone = phone;
+  formData.task = document.getElementById('userTask').value.trim();
+
+  // Log form data (replace with actual submission)
+  console.log('📋 Form submitted:', formData);
+
+  // Show success
+  document.querySelectorAll('.form-step').forEach(s => s.classList.remove('active'));
+  document.querySelector('.form-progress').style.display = 'none';
+  document.getElementById('formSuccess').classList.add('active');
+
+  // Track conversion
+  trackEvent('form_submitted', formData);
+});
+
+/* ── Analytics / Tracking (placeholder) ── */
+const sessionData = {
+  source: new URLSearchParams(window.location.search).get('utm_source') || 'direct',
+  medium: new URLSearchParams(window.location.search).get('utm_medium') || '',
+  campaign: new URLSearchParams(window.location.search).get('utm_campaign') || '',
+  startTime: Date.now(),
+  scrollDepth: 0,
+  sectionsViewed: new Set(),
+  events: []
+};
+
+// Track scroll depth
+let maxScroll = 0;
+window.addEventListener('scroll', () => {
+  const scrollPercent = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
+  if (scrollPercent > maxScroll) {
+    maxScroll = scrollPercent;
+    sessionData.scrollDepth = maxScroll;
+  }
+});
+
+// Track section visibility
+const sections = document.querySelectorAll('section[id]');
+const sectionObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      sessionData.sectionsViewed.add(entry.target.id);
+      trackEvent('section_viewed', { section: entry.target.id });
+    }
+  });
+}, { threshold: 0.3 });
+
+sections.forEach(s => sectionObserver.observe(s));
+
+// Track CTA clicks
+document.querySelectorAll('.btn-primary, .btn-secondary').forEach(btn => {
+  btn.addEventListener('click', () => {
+    trackEvent('cta_clicked', {
+      text: btn.textContent.trim(),
+      href: btn.getAttribute('href') || ''
+    });
+  });
+});
+
+function trackEvent(name, data = {}) {
+  const event = {
+    name,
+    data,
+    timestamp: Date.now(),
+    timeOnPage: Math.round((Date.now() - sessionData.startTime) / 1000)
+  };
+  sessionData.events.push(event);
+  console.log('📊 Track:', name, data);
+
+  // TODO: Send to your analytics backend
+  // fetch('/api/track', { method: 'POST', body: JSON.stringify(event) });
+}
+
+// Track exit
+window.addEventListener('beforeunload', () => {
+  trackEvent('session_end', {
+    scrollDepth: sessionData.scrollDepth,
+    sectionsViewed: [...sessionData.sectionsViewed],
+    totalTime: Math.round((Date.now() - sessionData.startTime) / 1000)
+  });
+});
+
+/* ── Smooth scroll for anchor links ── */
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      const offset = 80;
+      const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+  });
+});
+</script>
+
+</body>
+</html>
